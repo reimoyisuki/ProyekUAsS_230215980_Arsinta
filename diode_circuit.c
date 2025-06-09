@@ -30,9 +30,7 @@ double f(double t, double Vc) {
     double I_d = I_diode(Vc);
     double Ic = I_total - I_d;
 
-    // Baris "if (Ic < 0.0) Ic = 0.0;" dihapus.
-    // Arus kapasitor (Ic) bisa dan boleh negatif saat kapasitor membuang muatan (discharging).
-
+    
     return Ic / C;
 }
 
@@ -68,7 +66,6 @@ int main() {
         // Hitung Vc untuk langkah waktu berikutnya
         Vc = rk4_step(t, Vc, h);
         
-        // Batasan ini adalah jaring pengaman, tetapi seharusnya tidak diperlukan dalam simulasi fisik yang benar
         if (Vc < 0.0) Vc = 0.0;
         if (Vc > V0) Vc = V0;
 
